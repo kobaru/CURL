@@ -14,27 +14,22 @@ import java.io.FileOutputStream;
 
 public class App {
     void get() {
-
         String strUrl = "https://httpbin.org/get";
         HttpURLConnection  urlConn = null;
         InputStream in = null;
         BufferedReader reader = null;
 
         try {
-
             //接続するURLを指定する
             URL url = new URL(strUrl);
             //コネクションを取得する
             urlConn = (HttpURLConnection) url.openConnection();
-
             urlConn.setRequestMethod("GET");
             urlConn.connect();
-
             int responseCode = urlConn.getResponseCode();
             System.out.println("HTTPステータス:" + responseCode);
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
-
                 in = urlConn.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(in));
                 StringBuilder output = new StringBuilder();
@@ -45,83 +40,63 @@ public class App {
                 }
 
                 System.out.println(output.toString());
-
             }
-
         }
         catch (IOException e) {
             e.printStackTrace();
         }
         finally {
-
             try {
-
                 if (reader != null) {
                     reader.close();
                 }
-
                 if (urlConn != null) {
                     urlConn.disconnect();
                 }
-
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
-
     }
 
-    void dawnroad() {
-
+    void download() {
         String strUrl = "https://httpbin.org/image/png";
         HttpURLConnection  urlConn = null;
         InputStream in = null;
         BufferedReader reader = null;
 
         try {
-
             //接続するURLを指定する
             URL url = new URL(strUrl);
             //コネクションを取得する
             urlConn = (HttpURLConnection) url.openConnection();
-
             urlConn.setRequestMethod("GET");
             urlConn.connect();
-
             int responseCode = urlConn.getResponseCode();
             System.out.println("HTTPステータス:" + responseCode);
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
-
                 in = urlConn.getInputStream();
-                
                 File file = new File("/home/hiroki/CURL/file/image.png");
                 FileOutputStream out = new FileOutputStream(file, false);
                 int b;
                 while((b = in.read()) != -1){
                     out.write(b);
                 }
-
             }
-
         }
         catch (IOException e) {
             e.printStackTrace();
         }
         finally {
-
             try {
-
                 if (reader != null) {
                     reader.close();
                 }
-
                 if (urlConn != null) {
                     urlConn.disconnect();
                 }
-
             }
             catch (IOException e) {
                 e.printStackTrace();
@@ -131,22 +106,20 @@ public class App {
     
 
     public static void main(String[] args) {
-
         App s = new App();
-        
+
         for (int i = 0; i < args.length; i++) {
             switch (args[i]) {
                 case "-get":
                     s.get();
                     break;
-                case "-dawndoad":
-                    s.dawnroad();
+                case "-download":
+                    s.download();
                     break;
                 default:
                     System.out.println("引数を設定してください");
                     break;
             }
         }
-
     }
 }
