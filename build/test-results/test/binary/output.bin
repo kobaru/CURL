@@ -1,2 +1,0 @@
-HTTPステータス:200
-�{  "args": {},   "headers": {    "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",     "Host": "httpbin.org",     "User-Agent": "Java/11.0.6",     "X-Amzn-Trace-Id": "Root=1-5e844ed9-9d11cc14c4d3d57a74a10443"  },   "origin": "150.59.20.28",   "url": "https://httpbin.org/get"}

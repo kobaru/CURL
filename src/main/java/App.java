@@ -133,8 +133,20 @@ public class App {
     public static void main(String[] args) {
 
         App s = new App();
-        // s.get();
-        s.dawnroad();
+        
+        for (int i = 0; i < args.length; i++) {
+            switch (args[i]) {
+                case "-get":
+                    s.get();
+                    break;
+                case "-dawndoad":
+                    s.dawnroad();
+                    break;
+                default:
+                    System.out.println("引数を設定してください");
+                    break;
+            }
+        }
 
     }
 }
