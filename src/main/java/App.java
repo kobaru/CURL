@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.lang.StringBuilder;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.*;
 
 public class App {
     void get() {
@@ -36,7 +37,7 @@ public class App {
                 String line;
 
                 while ((line = reader.readLine()) != null) {
-                    output.append(line);
+                    output.append(line + "\r\n");
                 }
 
                 System.out.println(output.toString());
@@ -103,7 +104,65 @@ public class App {
             }
         }
     }
-    
+
+    void header() {
+        String strUrl = "https://httpbin.org/get";
+        HttpURLConnection  urlConn = null;
+        InputStream in = null;
+        BufferedReader reader = null;
+
+        try {
+            //接続するURLを指定する
+            URL url = new URL(strUrl);
+            //コネクションを取得する
+            urlConn = (HttpURLConnection) url.openConnection();
+            urlConn.setRequestMethod("GET");
+            urlConn.connect();
+            int responseCode = urlConn.getResponseCode();
+            Map headers = urlConn.getHeaderFields();
+            Iterator headerIt = headers.keySet().iterator();
+            String header = null;
+
+            System.out.println("HTTPステータス:" + responseCode);
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                in = urlConn.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(in));
+                StringBuilder output = new StringBuilder();
+
+                while(headerIt.hasNext()){
+                    String headerKey = (String)headerIt.next();
+                    header += headerKey + "：" + headers.get(headerKey) + "\r\n";
+                }
+
+                System.out.println(header.toString());
+
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    output.append(line + "\r\n");
+                }
+
+                System.out.println(output.toString());
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+                if (urlConn != null) {
+                    urlConn.disconnect();
+                }
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public static void main(String[] args) {
         App s = new App();
@@ -115,6 +174,9 @@ public class App {
                     break;
                 case "-download":
                     s.download();
+                    break;
+                case "-header":
+                    s.header();
                     break;
                 default:
                     System.out.println("引数を設定してください");
