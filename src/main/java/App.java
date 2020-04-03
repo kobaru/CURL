@@ -164,6 +164,55 @@ public class App {
         }
     }
 
+    void post() {
+        String strUrl = "https://httpbin.org/post";
+        HttpURLConnection  urlConn = null;
+        InputStream in = null;
+        BufferedReader reader = null;
+
+        try {
+            //接続するURLを指定する
+            URL url = new URL(strUrl);
+            //コネクションを取得する
+            urlConn = (HttpURLConnection) url.openConnection();
+            urlConn.setDoOutput(true);
+            urlConn.setRequestMethod("POST");
+            urlConn.connect();
+            int responseCode = urlConn.getResponseCode();
+
+            System.out.println("HTTPステータス:" + responseCode);
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                in = urlConn.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(in));
+                StringBuilder output = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    output.append(line + "\r\n");
+                }
+
+                System.out.println(output.toString());
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+                if (urlConn != null) {
+                    urlConn.disconnect();
+                }
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static void main(String[] args) {
         App s = new App();
 
@@ -178,6 +227,8 @@ public class App {
                 case "-header":
                     s.header();
                     break;
+                case "-post":
+                    s.post();
                 default:
                     System.out.println("引数を設定してください");
                     break;
