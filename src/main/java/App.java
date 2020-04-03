@@ -11,36 +11,50 @@ import java.nio.charset.StandardCharsets;
 
 public class App {
 
+    // 接続するURL
     private URL url;
-    private String reader;
-    private List<String> params;
 
-    void get() {
-        String strUrl = "https://httpbin.org/get";
+    // 読み込みに用いる
+    private String reader;
+
+    // コンストラクタ
+    public App(URL url){
+        this.url = url;
+        this.reader = "";
+    }
+
+    /* curl https://example.com 相当のことができる機能 */
+    public void get() {
+
+        // サーバーへ接続する
         HttpURLConnection  urlConn = null;
         InputStream in = null;
         BufferedReader reader = null;
 
         try {
-            //接続するURLを指定する
-            URL url = new URL(strUrl);
-            //コネクションを取得する
+            // コネクション関連
             urlConn = (HttpURLConnection) url.openConnection();
             urlConn.setRequestMethod("GET");
             urlConn.connect();
+
             int responseCode = urlConn.getResponseCode();
+
+            // HTTPステータス確認
             System.out.println("HTTPステータス:" + responseCode);
 
+            // 接続が確立したとき
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 in = urlConn.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(in));
                 StringBuilder output = new StringBuilder();
                 String line;
 
+                // レスポンスの読み込み
                 while ((line = reader.readLine()) != null) {
                     output.append(line + "\r\n");
                 }
 
+                // 結果の出力
                 System.out.println(output.toString());
             }
         }
@@ -48,6 +62,7 @@ public class App {
             e.printStackTrace();
         }
         finally {
+            // 開いたら閉じる
             try {
                 if (reader != null) {
                     reader.close();
@@ -62,27 +77,35 @@ public class App {
         }
     }
 
-    void download() {
-        String strUrl = "https://httpbin.org/image/png";
+    /* curl -o file https://example.com 相当のことができる機能 */
+    public void download(String filePath) {
+        
+        // サーバーへ接続する
         HttpURLConnection  urlConn = null;
         InputStream in = null;
         BufferedReader reader = null;
 
         try {
-            //接続するURLを指定する
-            URL url = new URL(strUrl);
-            //コネクションを取得する
+
+            // コネクション関連
             urlConn = (HttpURLConnection) url.openConnection();
             urlConn.setRequestMethod("GET");
             urlConn.connect();
             int responseCode = urlConn.getResponseCode();
+
+            // HTTPステータス確認
             System.out.println("HTTPステータス:" + responseCode);
 
+            // 接続が確立したとき
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 in = urlConn.getInputStream();
-                File file = new File("/home/hiroki/CURL/file/image.png");
+
+                // ファイル関連
+                File file = new File(filePath);
                 FileOutputStream out = new FileOutputStream(file, false);
                 int b;
+
+                // 読み込み
                 while((b = in.read()) != -1){
                     out.write(b);
                 }
@@ -92,6 +115,7 @@ public class App {
             e.printStackTrace();
         }
         finally {
+            // 開いたら閉じる
             try {
                 if (reader != null) {
                     reader.close();
@@ -106,44 +130,54 @@ public class App {
         }
     }
 
-    void header() {
-        String strUrl = "https://httpbin.org/get";
+    /* curl -v https://example.com 相当のことができる機能 */
+    public void header() {
+
+        // サーバーへ接続する
         HttpURLConnection  urlConn = null;
         InputStream in = null;
         BufferedReader reader = null;
 
         try {
-            //接続するURLを指定する
-            URL url = new URL(strUrl);
-            //コネクションを取得する
+
+            // コネクション関連
             urlConn = (HttpURLConnection) url.openConnection();
             urlConn.setRequestMethod("GET");
             urlConn.connect();
+
             int responseCode = urlConn.getResponseCode();
+
+            // ヘッダー関連
             Map headers = urlConn.getHeaderFields();
             Iterator headerIt = headers.keySet().iterator();
             String header = null;
 
+            // HTTPステータス確認
             System.out.println("HTTPステータス:" + responseCode);
 
+            // 接続が確立したとき
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 in = urlConn.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(in));
                 StringBuilder output = new StringBuilder();
 
+                // ヘッダーの読み込み
                 while(headerIt.hasNext()){
                     String headerKey = (String)headerIt.next();
                     header += headerKey + "：" + headers.get(headerKey) + "\r\n";
                 }
 
+                // 結果の出力
                 System.out.println(header.toString());
 
                 String line;
 
+                // レスポンスの読み込み
                 while ((line = reader.readLine()) != null) {
                     output.append(line + "\r\n");
                 }
 
+                // 結果の出力
                 System.out.println(output.toString());
             }
         }
@@ -151,6 +185,7 @@ public class App {
             e.printStackTrace();
         }
         finally {
+            // 開いたら閉じる
             try {
                 if (reader != null) {
                     reader.close();
@@ -165,24 +200,28 @@ public class App {
         }
     }
 
-    void post() {
-        String strUrl = "https://httpbin.org/post";
+    /* curl -X POST https://example.com 相当のことができる機能 */
+    public void post() {
+
+        // サーバーへ接続する
         HttpURLConnection  urlConn = null;
         InputStream in = null;
         BufferedReader reader = null;
 
         try {
-            //接続するURLを指定する
-            URL url = new URL(strUrl);
-            //コネクションを取得する
+
+            // コネクション関連
             urlConn = (HttpURLConnection) url.openConnection();
             urlConn.setDoOutput(true);
             urlConn.setRequestMethod("POST");
             urlConn.connect();
+
             int responseCode = urlConn.getResponseCode();
 
+            // HTTPステータス確認
             System.out.println("HTTPステータス:" + responseCode);
 
+            // 接続が確立したとき
             if (responseCode == HttpURLConnection.HTTP_OK) {
 
                 in = urlConn.getInputStream();
@@ -190,10 +229,12 @@ public class App {
                 StringBuilder output = new StringBuilder();
                 String line;
 
+                // レスポンスの読み込み
                 while ((line = reader.readLine()) != null) {
                     output.append(line + "\r\n");
                 }
 
+                // 結果の出力
                 System.out.println(output.toString());
             }
         }
@@ -215,42 +256,50 @@ public class App {
         }
     }
 
-    void post_out() {
-        String strUrl = "https://httpbin.org/post";
+    /* curl -X POST "key=value" https://example.com 相当のことができる機能 */
+    public void post_out(String par) {
+
+        // サーバーへ接続する
         HttpURLConnection  urlConn = null;
         InputStream in = null;
         BufferedReader reader = null;
 
         try {
-            //接続するURLを指定する
-            URL url = new URL(strUrl);
-            //コネクションを取得する
+
+            // コネクション関連
             urlConn = (HttpURLConnection) url.openConnection();
             urlConn.setDoOutput(true);
             urlConn.setInstanceFollowRedirects(false);
             urlConn.setRequestMethod("POST");
 
-            String parameter = "key=value&key=a";
+            // パラメーターの設定
+            String parameter = par;
             OutputStreamWriter out = new OutputStreamWriter(urlConn.getOutputStream(),StandardCharsets.UTF_8);
             out.write(parameter);
             out.flush();
             out.close();
 
             int responseCode = urlConn.getResponseCode();
+
+            // 接続
             urlConn.connect();
 
+            // HTTPステータス確認
             System.out.println("HTTPステータス:" + responseCode);
 
+            // 接続が確立したとき
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 in = urlConn.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(in));
                 StringBuilder output = new StringBuilder();
                 String line;
 
+                // レスポンスの読み込み
                 while ((line = reader.readLine()) != null) {
                     output.append(line + "\r\n");
                 }
 
+                // 結果の出力
                 System.out.println(output.toString());
             }
         }
@@ -273,29 +322,41 @@ public class App {
     }
 
     public static void main(String[] args) {
-        App s = new App();
+        try {
+            // URLの取得
+            URL url = new URL(args[args.length - 1]);
 
-        for (int i = 0; i < args.length; i++) {
-            switch (args[i]) {
-                case "-get":
-                    s.get();
-                    break;
-                case "-download":
-                    s.download();
-                    break;
-                case "-header":
-                    s.header();
-                    break;
-                case "-post":
-                    s.post();
-                    break;
-                case "-post_out":
-                    s.post_out();
-                    break;
-                default:
-                    System.out.println("引数を設定してください");
-                    break;
+            // インスタンス生成
+            App s = new App(url);
+
+            // 引数ごとの処理
+            for (int i = 0; i < args.length; i++) {
+                switch (args[i]) {
+                    case "-get":
+                        s.get();
+                        break;
+                    case "-download":
+                        i++;
+                        s.download(args[i]);
+                        break;
+                    case "-header":
+                        s.header();
+                        break;
+                    case "-post":
+                        s.post();
+                        break;
+                    case "-post_out":
+                        i++;
+                        s.post_out(args[i]);
+                        break;
+                    default:
+                        if (i == 0) {
+                            System.out.println("引数を設定してください");
+                        }
+                        break;
+                }
             }
         }
+        catch (MalformedURLException e){}
     }
 }

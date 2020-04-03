@@ -8,6 +8,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.After;
 import org.junit.Before;
+import java.net.*;
+import java.lang.*;
+import java.util.*;
+import java.io.*;
+import org.w3c.dom.*;
+import java.nio.charset.StandardCharsets;
 
 public class AppTest {
 
@@ -25,9 +31,14 @@ public class AppTest {
 
     @Test
     public void getメソッドの通信を確認() {
-        App classUnderTest = new App();
 
-        classUnderTest.get();
+        try {
+            URL url = new URL("https://httpbin.org/get");
+            App classUnderTest = new App(url);
+            classUnderTest.get();
+        }
+        catch (MalformedURLException e){}
+
 
         final String expected = "HTTPステータス:200";
         final String ac = outContent.toString();
@@ -38,9 +49,13 @@ public class AppTest {
 
     @Test
     public void downloadメソッドの通信を確認() {
-        App classUnderTest = new App();
 
-        classUnderTest.download();
+        try {
+            URL url = new URL("https://httpbin.org/image/png");
+            App classUnderTest = new App(url);
+            classUnderTest.download("file/image.png");
+        }
+        catch (MalformedURLException e){}
 
         final String expected = "HTTPステータス:200";
         final String ac = outContent.toString();
@@ -51,9 +66,13 @@ public class AppTest {
 
     @Test
     public void headerメソッドの通信を確認() {
-        App classUnderTest = new App();
 
-        classUnderTest.header();
+        try {
+            URL url = new URL("https://httpbin.org/get");
+            App classUnderTest = new App(url);
+            classUnderTest.header();
+        }
+        catch (MalformedURLException e){}
 
         final String expected = "HTTPステータス:200";
         final String ac = outContent.toString();
@@ -64,9 +83,13 @@ public class AppTest {
 
     @Test
     public void postメソッドの通信を確認() {
-        App classUnderTest = new App();
 
-        classUnderTest.post();
+        try {
+            URL url = new URL("https://httpbin.org/post");
+            App classUnderTest = new App(url);
+            classUnderTest.post();
+        }
+        catch (MalformedURLException e){}
 
         final String expected = "HTTPステータス:200";
         final String ac = outContent.toString();
@@ -77,9 +100,13 @@ public class AppTest {
 
     @Test
     public void post_outメソッドの通信を確認() {
-        App classUnderTest = new App();
 
-        classUnderTest.post_out();
+        try {
+            URL url = new URL("https://httpbin.org/post");
+            App classUnderTest = new App(url);
+            classUnderTest.post_out("key=value");
+        }
+        catch (MalformedURLException e){}
 
         final String expected = "HTTPステータス:200";
         final String ac = outContent.toString();

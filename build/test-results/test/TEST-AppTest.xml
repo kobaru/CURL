@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="AppTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2020-04-03T07:16:43" hostname="hiroki-B85H3-M4" time="2.199">
+<testsuite name="AppTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2020-04-03T11:18:34" hostname="hiroki-B85H3-M4" time="2.06">
   <properties/>
-  <testcase name="downloadメソッドの通信を確認" classname="AppTest" time="0.918"/>
-  <testcase name="postメソッドの通信を確認" classname="AppTest" time="0.722"/>
+  <testcase name="downloadメソッドの通信を確認" classname="AppTest" time="0.965"/>
+  <testcase name="postメソッドの通信を確認" classname="AppTest" time="0.538"/>
   <testcase name="headerメソッドの通信を確認" classname="AppTest" time="0.2"/>
   <testcase name="post_outメソッドの通信を確認" classname="AppTest" time="0.178"/>
-  <testcase name="getメソッドの通信を確認" classname="AppTest" time="0.178"/>
+  <testcase name="getメソッドの通信を確認" classname="AppTest" time="0.179"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
