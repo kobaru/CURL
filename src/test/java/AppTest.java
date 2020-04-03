@@ -74,4 +74,17 @@ public class AppTest {
 
         assertEquals(expected, actual[0]);
     }
+
+    @Test
+    public void post_outメソッドの通信を確認() {
+        App classUnderTest = new App();
+
+        classUnderTest.post_out();
+
+        final String expected = "HTTPステータス:200";
+        final String ac = outContent.toString();
+        final String[] actual = ac.split("\n");
+
+        assertEquals(expected, actual[0]);
+    }
 }
