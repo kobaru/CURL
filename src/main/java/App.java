@@ -10,6 +10,11 @@ import org.w3c.dom.*;
 import java.nio.charset.StandardCharsets;
 
 public class App {
+
+    private URL url;
+    private String reader;
+    private List<String> params;
+
     void get() {
         String strUrl = "https://httpbin.org/get";
         HttpURLConnection  urlConn = null;
