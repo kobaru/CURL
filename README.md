@@ -17,7 +17,7 @@ curlコマンドライクな振る舞いをするjavaアプリケーションの
 ### オプション
 
 任意のオプションを選択できます  
-各コマンドの下に実行例を載せています
+各コマンドの下に実行例を載せています  
 
 ***-get***  
 `$ curl https://example.com` 相当のことができる機能  
@@ -33,4 +33,8 @@ curlコマンドライクな振る舞いをするjavaアプリケーションの
 
 ***-post***  
 `$ curl -X POST https://example.com` 相当のことができる機能  
-`$ java -classpath build/libs/CURL.jar App -post https://httpbin.org/post`
+`$ java -classpath build/libs/CURL.jar App -post https://httpbin.org/post`  
+
+***-postout***  
+`$ curl -X POST "key=value" https://example.com` 相当のことができる機能  
+`$ java -classpath build/libs/CURL.jar App -postout "key=value" https://httpbin.org/post`  
