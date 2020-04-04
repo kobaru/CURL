@@ -4,15 +4,15 @@ curlコマンドライクな振る舞いをするjavaアプリケーションの
 
 ### コンパイル
 
-$ gradle clean compileJava
+'$ gradle clean compileJava'
 
 ### ビルド
 
-$ gradle build
+'$ gradle build'
 
 ### 実行
 
-$ java -classpath build/libs/CURL.jar App [オプション] [任意のURL]
+'$ java -classpath build/libs/CURL.jar App [オプション] [任意のURL]'
 
 ### オプション
 
@@ -21,7 +21,8 @@ $ java -classpath build/libs/CURL.jar App [オプション] [任意のURL]
 <dl>
   <dt>-get</dt>
   <dd>curl https://example.com 相当のことができる機能</dd>
-  <dd>$ java -classpath build/libs/CURL.jar App -get https://httpbin.org/get<dd>
+  <dd>'$ java -classpath build/libs/CURL.jar App -get https://httpbin.org/get'</dd>
   <dt>-download</dt>
   <dd>curl -o file https://example.com 相当のことができる機能</dd>
+  <dd>'$ java -classpath build/libs/CURL.jar App -download file/image.png https://httpbin.org/image/png'</dd>
 </dl> 
