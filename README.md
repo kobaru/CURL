@@ -21,26 +21,26 @@ curlコマンドライクな振る舞いをするjavaアプリケーションの
 
 ***-get***  
 `$ curl https://example.com` 相当のことができる機能  
-`$ java -classpath build/libs/CURL.jar App -get https://httpbin.org/get`  
+`$ java -jar build/libs/CURL.jar -get https://httpbin.org/get`  
 
 ***-download***  
 `$ curl -o file https://example.com` 相当のことができる機能  
-`$ java -classpath build/libs/CURL.jar App -download file/image.png https://httpbin.org/image/png`  
+`$ java -jar build/libs/CURL.jar -download file/image.png https://httpbin.org/image/png`  
 
 ***-header***  
 `$ curl -v https://example.com` 相当のことができる機能  
-`$ java -classpath build/libs/CURL.jar App -header https://httpbin.org/get`  
+`$ java -jar build/libs/CURL.jar -header https://httpbin.org/get`  
 
 ***-post***  
 `$ curl -X POST https://example.com` 相当のことができる機能  
-`$ java -classpath build/libs/CURL.jar App -post https://httpbin.org/post`  
+`$ java -jar build/libs/CURL.jar -post https://httpbin.org/post`  
 
 ***-postout***  
 `$ curl -X POST "key=value" https://example.com` 相当のことができる機能  
-`$ java -classpath build/libs/CURL.jar App -postout "key=value" https://httpbin.org/post`  
+`$ java -jar build/libs/CURL.jar -postout "key=value" https://httpbin.org/post`  
 
 ### 複数オプションの指定
 
 同一URLなら複数のオプションを同時に設定可能です
 
-`$ java -classpath build/libs/CURL.jar App -get -header https://httpbin.org/get`  
+`$ java -jar build/libs/CURL.jar -get -header https://httpbin.org/get`  
