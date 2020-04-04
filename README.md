@@ -38,3 +38,9 @@ curlコマンドライクな振る舞いをするjavaアプリケーションの
 ***-postout***  
 `$ curl -X POST "key=value" https://example.com` 相当のことができる機能  
 `$ java -classpath build/libs/CURL.jar App -postout "key=value" https://httpbin.org/post`  
+
+### 複数オプションの指定
+
+同一URLなら複数のオプションを同時に設定可能です
+
+`$ java -classpath build/libs/CURL.jar App -get -header https://httpbin.org/get`  
