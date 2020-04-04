@@ -99,12 +99,12 @@ public class AppTest {
     }
 
     @Test
-    public void post_outメソッドの通信を確認() {
+    public void postoutメソッドの通信を確認() {
 
         try {
             URL url = new URL("https://httpbin.org/post");
             App classUnderTest = new App(url);
-            classUnderTest.post_out("key=value");
+            classUnderTest.postout("key=value");
         }
         catch (MalformedURLException e){}
 

@@ -86,7 +86,6 @@ public class App {
         BufferedReader reader = null;
 
         try {
-
             // コネクション関連
             urlConn = (HttpURLConnection) url.openConnection();
             urlConn.setRequestMethod("GET");
@@ -139,7 +138,6 @@ public class App {
         BufferedReader reader = null;
 
         try {
-
             // コネクション関連
             urlConn = (HttpURLConnection) url.openConnection();
             urlConn.setRequestMethod("GET");
@@ -209,7 +207,6 @@ public class App {
         BufferedReader reader = null;
 
         try {
-
             // コネクション関連
             urlConn = (HttpURLConnection) url.openConnection();
             urlConn.setDoOutput(true);
@@ -242,6 +239,7 @@ public class App {
             e.printStackTrace();
         }
         finally {
+            // 開いたら閉じる
             try {
                 if (reader != null) {
                     reader.close();
@@ -257,7 +255,7 @@ public class App {
     }
 
     /* curl -X POST "key=value" https://example.com 相当のことができる機能 */
-    public void post_out(String par) {
+    public void postout(String par) {
 
         // サーバーへ接続する
         HttpURLConnection  urlConn = null;
@@ -265,7 +263,6 @@ public class App {
         BufferedReader reader = null;
 
         try {
-
             // コネクション関連
             urlConn = (HttpURLConnection) url.openConnection();
             urlConn.setDoOutput(true);
@@ -307,6 +304,7 @@ public class App {
             e.printStackTrace();
         }
         finally {
+            // 開いたら閉じる
             try {
                 if (reader != null) {
                     reader.close();
@@ -345,12 +343,12 @@ public class App {
                     case "-post":
                         s.post();
                         break;
-                    case "-post_out":
+                    case "-postout":
                         i++;
-                        s.post_out(args[i]);
+                        s.postout(args[i]);
                         break;
                     default:
-                        if (i == 0) {
+                        if (args[i] != args[args.length - 1]) {
                             System.out.println("引数を設定してください");
                         }
                         break;
