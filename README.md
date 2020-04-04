@@ -18,11 +18,9 @@ curlコマンドライクな振る舞いをするjavaアプリケーションの
 
 任意のオプションを選択できます
 
-<dl>
-  <dt>-get</dt>
-  <dd>curl https://example.com 相当のことができる機能</dd>
-  <dd>`$ java -classpath build/libs/CURL.jar App -get https://httpbin.org/get`</dd>
-  <dt>-download</dt>
-  <dd>curl -o file https://example.com 相当のことができる機能</dd>
-  <dd>`$ java -classpath build/libs/CURL.jar App -download file/image.png https://httpbin.org/image/png`</dd>
-</dl> 
+***-get***
+curl https://example.com 相当のことができる機能
+`$ java -classpath build/libs/CURL.jar App -get https://httpbin.org/get`
+***-download***
+curl -o file https://example.com 相当のことができる機能
+`$ java -classpath build/libs/CURL.jar App -download file/image.png https://httpbin.org/image/png`
